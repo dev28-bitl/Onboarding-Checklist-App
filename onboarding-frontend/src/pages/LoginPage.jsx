@@ -24,15 +24,26 @@ function LoginPage() {
     <main className="auth-shell">
       <form className="auth-card" onSubmit={handleSubmit}>
         <h1>Onboarding Checklist</h1>
-        <p>Sign in to continue.</p>
-        <input type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+        <p className="muted-text">Sign in to access your onboarding tasks, templates, and team reports.</p>
+        <label className="field-label" htmlFor="email">Email</label>
         <input
+          id="email"
+          type="email"
+          placeholder="name@company.com"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+        <label className="field-label" htmlFor="password">Password</label>
+        <input
+          id="password"
           type="password"
-          placeholder="Password"
+          placeholder="Enter your password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           required
         />
+        <p className="helper-text">Use your assigned role account to see role-specific dashboard sections.</p>
         {error && <div className="error-text">{error}</div>}
         <button type="submit">Login</button>
         <Link to="/register">Create account</Link>

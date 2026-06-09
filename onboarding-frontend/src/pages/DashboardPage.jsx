@@ -186,11 +186,19 @@ function DashboardPage() {
 
       {error && <p className="error-text">{error}</p>}
 
+      <section className="card section-block">
+        <h3 className="section-title">Workspace Overview</h3>
+        <p className="muted-text">
+          This dashboard is personalized by your role. Track progress below and use the highlighted action panels to move onboarding forward.
+        </p>
+      </section>
+
       {isManager && (
         <section className="grid-two">
           <TemplateForm onSubmit={onCreateTemplate} />
           <div className="card section-block">
             <h3>Assign From Template</h3>
+            <p className="helper-text">Select a developer and assign a checklist template in one click.</p>
             <label htmlFor="assignee-select">Assign to developer</label>
             <select
               id="assignee-select"
@@ -216,6 +224,7 @@ function DashboardPage() {
                 </button>
               ))}
             </div>
+            {!templates.length && <p className="helper-text">Create a template first to enable assignment actions.</p>}
           </div>
         </section>
       )}
@@ -287,17 +296,45 @@ function DashboardPage() {
       <section className="grid-two">
         <div className="card">
           <h3>My Dashboard Report</h3>
-          <p>Total Checklists: {checklists.length}</p>
-          <p>Assigned: {assignedChecklists}</p>
-          <p>In Progress: {inProgressChecklists}</p>
-          <p>Completed: {completedChecklists}</p>
-          <p>Task Completion: {myCompletionPercent}%</p>
+          <div className="stats-grid">
+            <div className="stat-card">
+              <span className="stat-label">Total Checklists</span>
+              <strong>{checklists.length}</strong>
+            </div>
+            <div className="stat-card">
+              <span className="stat-label">Assigned</span>
+              <strong>{assignedChecklists}</strong>
+            </div>
+            <div className="stat-card">
+              <span className="stat-label">In Progress</span>
+              <strong>{inProgressChecklists}</strong>
+            </div>
+            <div className="stat-card">
+              <span className="stat-label">Completed</span>
+              <strong>{completedChecklists}</strong>
+            </div>
+            <div className="stat-card full-width">
+              <span className="stat-label">Task Completion</span>
+              <strong>{myCompletionPercent}%</strong>
+            </div>
+          </div>
         </div>
         <div className="card">
           <h3>My Task Summary</h3>
-          <p>Total Tasks: {totalTasks}</p>
-          <p>Completed Tasks: {completedTasks}</p>
-          <p>Pending Tasks: {totalTasks - completedTasks}</p>
+          <div className="stats-grid">
+            <div className="stat-card">
+              <span className="stat-label">Total Tasks</span>
+              <strong>{totalTasks}</strong>
+            </div>
+            <div className="stat-card">
+              <span className="stat-label">Completed Tasks</span>
+              <strong>{completedTasks}</strong>
+            </div>
+            <div className="stat-card full-width">
+              <span className="stat-label">Pending Tasks</span>
+              <strong>{totalTasks - completedTasks}</strong>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -327,10 +364,11 @@ function DashboardPage() {
       )}
 
       <section className="stack">
+        <h3 className="section-title">My Checklists</h3>
         {checklists.map((checklist) => (
           <ChecklistCard key={checklist.id} checklist={checklist} onToggleTask={onToggleTask} />
         ))}
-        {!checklists.length && <div className="card">No checklists assigned yet.</div>}
+        {!checklists.length && <div className="card empty-state">No checklists assigned yet. Managers can assign templates to get you started.</div>}
       </section>
     </main>
   )
