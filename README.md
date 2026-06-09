@@ -2,6 +2,10 @@
 
 Full-stack onboarding tracker built with React + FastAPI + PostgreSQL.
 
+## Deployment Guides
+
+- Ubuntu VPS (No Docker): [DEPLOYMENT_UBUNTU_VPS.md](DEPLOYMENT_UBUNTU_VPS.md)
+
 ## Features
 
 - Authentication with JWT and role-based access (`admin`, `manager`, `developer`)
